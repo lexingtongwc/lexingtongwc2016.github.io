@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Brick VS Ball!!</title>
+<script type="text/javascript" src="./processing.min.js"></script><body>
+
+
+
+</head>
+<body>
+
+
+	<marquee behavior="scroll" direction="left"> BRICK VS BALL!! </marquee>
+
+		
+
+<div><center>Game created by: Anita Keltcher</center></div>
+
+		<div><center>Webpage created by: Jyothsna Bolleddula and Liza Nussbaum</div></center> 
+
+	
+<canvas id="processing-canvas" tabindex="0" style="width='5000px' height='5000px'"></canvas>
+
+<script type="text/processing" data-processing-target="processing-canvas">
+size(400, 400);
+var ball_speed = 3.5;
+var x = (300*Math.random())+50;
+var y = 250;
+var y_speed = ball_speed*-1;
+var x_speed = ball_speed;
+var x_rect = 175;
+var paddle_w = 100;
+var paddle_h = 15;
+var x_brick = 10;
+var y_brick = 10;
+var i = 0;
+var j = 0;
+var level = 1;
+var brick_visible = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+var brick_start_x = [15,95,175,255,335,15,95,175,255,335,15,95,175,255,335];
+var brick_start_y = [15,15,15,15,15,45,45,45,45,45,75,75,75,75,75];
+noStroke();
+draw = function() {
+    background(30, 33, 92);
+    //ball
+    fill(255, 242, 0);
+    ellipse(x,y,30,30);
+    fill(255, 0, 0);
+    if(y > 385){
+        textSize(50);
+        text('Fail :(',140,200);
+        x = 300;
+        y = 500;
+        x_speed = 0;
+        y_speed = 0;
+        return;
+    }
+    if(y < 15){
+        y_speed = ball_speed;
+    }
+    y = y + y_speed;
+    if(x > 385){
+        x_speed = ball_speed*-1;
+    }
+    if(x < 15){
+        x_speed = ball_speed;
+    }
+    x = x + x_speed;
+    //paddle
+    fill(190, 5, 252);
+    rect(x_rect,350,paddle_w,paddle_h,5);
+    x_rect = mouseX;
+    if((x > x_rect+20) & (x < x_rect+paddle_w-20) & (y > 350)){
+        x_speed = x_speed;
+        y_speed = ball_speed*-1;
+    }
+    if((x > x_rect) & (x < x_rect+20) & (y > 350)){
+        x_speed = ball_speed*-1;
+        y_speed = ball_speed*-1;
+    }
+    if((x > x_rect+paddle_w-20) & (x < x_rect+paddle_w) & (y > 350)){
+        x_speed = ball_speed*-1;
+        y_speed = ball_speed*-1;
+    }
+    //bricks
+    fill(0, 255, 191);
+    var i = 0;
+    var j = 0;
+    for(i=0; i<15; i++){
+        if(brick_visible[i] === 1){
+            rect(brick_start_x[i],brick_start_y[i],50,10,5);
+            if((x+15 > brick_start_x[i]) & (x-15 < brick_start_x[i] + 50) & (y < brick_start_y[i])){
+                x_speed = x_speed*-1;
+                y_speed = ball_speed*-1;
+                brick_visible[i] = 0;
+            }
+        }
+    }
+    var done = 1;
+    for(i=0; i<15; i++){
+        if(brick_visible[i] === 1){
+            done = 0;
+        }
+    }
+    //level
+    if(done === 1){
+        level = level+1;
+        paddle_w = paddle_w-10;
+        ball_speed = ball_speed+0.5;
+        x = (300*Math.random())+50;
+        y = 250;
+        x_speed = ball_speed;
+        y_speed = ball_speed*-1;
+        brick_visible = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+    }
+    fill(255, 255, 255);
+    textSize(15);
+    text('level '+level,350,380);
+    if((done === 0) & (level === 6)){
+        fill(30, 33, 92);
+        textSize(15);
+        text('level '+level,350,380);
+        textSize(50);
+        text("WIN :)",150,200);
+        x = 200;
+        y = 300;
+    }
+};
+
+</script>
+
+
+<style>
+
+	body {
+	
+	background-color: #00aaff;
+
+	}
+
+
+
+
+	marquee{
+	
+	color: #99ff99;
+	
+	font-size: 50px;
+
+	}
+
+
+	
+
+	div{
+	font-family: "Comic Sans MS";
+	color: #80ffff;
+	}
+
+canvas {
+    padding: 0;
+    margin: auto;
+    display: block;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+</style>
+
+
+
+</body>
+
+
+</html>
+
+
+
+

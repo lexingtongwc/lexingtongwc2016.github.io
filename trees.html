@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="./processing.min.js"> </script>
+        <meta charset="utf-8">
+        <title>Tree Gif</title>
+    </head>
+    <style>
+    .nav {
+        font-family: "Courier New", courier, monospace;
+        font-size: small;
+        font-style: italic;
+        text-align: center;
+    }
+    .intro {
+        font-family: ();
+        font-size: large;
+        font-style: normal;
+        text-align: left;
+        width: 92%;
+    }
+    .title {
+        font-family: "Impact";
+        font-style: bold;
+        font-size: 125%;
+    }
+    h3 {
+        font-style: oblique; 
+    }
+    
+    header {
+        color: red;
+    }
+    </style>
+    <body>
+    <div class = "title">
+    <center><h1><header>Tree Animation</header></h1></center>
+    <p><center>by Grace & Pip</center></p>
+    <center><p>Page made by: Annika Bajaj and Sue Purohit</p></center>
+    </div>
+    <div class = "intro">
+    <p>On  this webpage is an animation passing through <em>summer</em>, <em>fall</em>, and <em>winter</em>, made by Grace and Pip. Hope you enjoy it! <img src = "https://www.kasandbox.org/programming-images/avatars/leaf-green.png"></p>
+    </div>
+    <canvas id="processing-canvas" tabindex="0" style="width='5000px' height='5000px'"></canvas>
+    <script type="text/processing" data-processing-target="processing-canvas">
+size(400, 400);
+var time = 0;
+
+var a = 102;
+var b = 85;
+var c = 58;
+var d = 36;
+var e = 5;
+var f = 29;
+var g = 59;
+var h = 80;
+var i= 18;
+var j = 2;
+
+
+var rColor = 50;
+var gColor = 145;
+var bColor = 26;
+
+var rcolor = 44;
+var gcolor = 215;
+var bcolor = 26;
+
+var snowOnTree = false;
+var snowflakeY = -10;
+
+draw = function() {
+
+time++;
+
+for (var i = 0; i < 400; i ++) {
+    fill (i-80, i-40, i+800);
+    noStroke();
+    rect(0,i,397,1);
+} //background
+fill(89, 150, 65);
+rect(-23,400,428,-81);
+fill(125, 67, 23);
+rect(163,319,70,-217);
+
+
+var sun = function(MX, MY) {
+    fill(255, 219, 59);
+    noStroke();
+    rect(MX, MY, 81, 80, 10);
+    fill(255, 244, 140, 80);
+    ellipse(MX + 54, MY + 44, 15, 15);
+    ellipse(MX + 24, MY + 53, 15, 15);
+    ellipse(MX + 47, MY + 23, 15, 15);
+};
+sun(-3, -8);
+
+// Snow falling
+if (time > 400){
+    for(var q = 0; q < 400; q++) {
+    strokeWeight(20);
+    stroke(255, 255, 255);
+    var x = q * 40;
+    point(x,snowflakeY);
+}
+snowflakeY++;
+}
+
+var SingleGB = function(GX, GY) {   //grass block
+  fill( rColor, gColor, bColor);
+  rect(GX, GY, 81, 80, 81);
+  fill(rcolor, gcolor, bcolor,80);
+  ellipse(GX + 52, GY + 44, 42, 42);
+  ellipse(GX + 24, GY + 53, 42, 42);
+  ellipse(GX + 47, GY + 23, 42, 42);
+};
+
+rColor += 1;
+gColor -= 0.5;
+
+rcolor += 0.5;
+gcolor += 0.5;
+// Branches
+stroke(125, 67, 23);
+strokeWeight(20);
+line(41,57,211,124);
+line(359,57,211,115);
+line(203,31,200,124);
+
+
+noStroke();
+SingleGB(216, a);
+SingleGB(164, b);
+SingleGB(66, c);
+SingleGB(49, d);
+SingleGB(148, e);
+SingleGB(212, f);
+SingleGB(241, g);
+SingleGB(116, h);
+SingleGB(375, i);
+SingleGB(132, j);
+
+a++;
+b++;
+c++;
+d++;
+e++;
+f++;
+g++;
+h++;
+i++;
+j++;
+
+
+if(time === 400){
+    snowOnTree = true;
+}
+if (snowOnTree === true){
+    // Snow on tree
+    strokeWeight(20);
+    stroke(255, 255, 255);
+    line(40,50,160,98);
+    line(213,30,210,96);
+    line(359,50,228,104);
+}
+};
+    </script>
+    </body>
+</html>

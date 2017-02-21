@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	
+<head>
+<title>PIN THE NOSE ON THE KOALA</title>
+<script type="text/javascript" src="./processing.min.js"></script>		
+</head>
+
+<body>
+
+<h1><center>PIN THE NOSE ON THE KOALA!!</center></h1>
+<b><div><center>Created by Sanch Sen, Antoinette Tan, Anita Keltcher</center></div></b>
+<b><div><center>Webpage Created by: Jyothsna Bolleddula, Liza Nussbaum</center></div></b>
+<center><canvas id="processing-canvas" tabindex="0" style="width='5000px' height='5000px'"></canvas></center>
+
+
+<script type="text/processing" data-processing-target="processing-canvas">
+size(400, 400);
+var bodyX = 100;
+var bodyY = 200;
+var bodyW = 150;
+var gameover = false;
+
+var drawfatkoala = function() {
+   strokeWeight(4);
+   line(bodyX - 90, bodyY - 150, bodyX +90, bodyY -150);
+     background(55, 20, 200);
+     noStroke();
+    fill(179, 175, 154);
+    ellipse(bodyX, bodyY, bodyW, bodyW); // body?
+    ellipse(bodyX, bodyY-80, bodyW/1.5, bodyW/1.5); // face?
+    
+    ellipse(bodyX-78, bodyY, bodyW/3, bodyW/3); //right arm
+   ellipse(bodyX+78, bodyY, bodyW/3, bodyW/3);  //left arm
+   ellipse(bodyX+50, bodyY-110,bodyW/3, bodyW/3); //right ear
+    ellipse(bodyX-50, bodyY-110,bodyW/3, bodyW/3); //left ear
+     ellipse(bodyX+40, bodyY+70, bodyW/3, bodyW/3); //right leg
+     ellipse(bodyX-40, bodyY+70, bodyW/3, bodyW/3); //left egg
+    fill(0, 0, 0);
+    //ellipse(bodyX, bodyY-80,bodyW/9, bodyW/7); //nose
+    ellipse(bodyX-25, bodyY-95,bodyW/11, bodyW/11); //left ear
+    ellipse(bodyX+25, bodyY-95, bodyW/11, bodyW/11); //right ear
+   fill(255, 255, 255);
+   ellipse(bodyX, bodyY, bodyW/3, bodyW/3.4); //belly
+   
+
+   fill(0,0,0);
+   ellipse(bodyX, bodyY-140, 20, 20); //circle
+   stroke(0,0,0);
+   
+   line(bodyX+500, bodyY-150, bodyX-500, bodyY-150); //line
+  
+  fill(255, 166, 0);
+  textSize(20);
+  text("try to click where you think the nose is",20,20);
+};
+   var speed = 1;
+draw = function() {
+	drawfatkoala();
+
+	bodyX = bodyX + speed;
+	if (bodyX>300) {speed = -4;}
+	bodyX= bodyX + speed;
+
+	if (bodyX<100) {speed = +4;}
+
+
+	if ((mousePressed) & (mouseX>bodyX) & (mouseX<bodyX+16) & (mouseY<bodyY-60) & (mouseY>bodyY-80))
+	{gameover=true;}
+
+	if (gameover) {
+	    fill(0, 0, 0);
+	    ellipse(bodyX, bodyY-80,bodyW/9, bodyW/7);
+	    speed = 0;
+	    fill(10, 255, 43);
+	    textSize(50);
+	    text("YOU WIN!",80,200);
+	}
+
+
+};
+</script>
+
+<style>
+body {
+    background-image: url(http://cdni.wired.co.uk/620x413/d_f/euc2.jpg);
+    background-repeat: no-repeat;
+    background-size: 300% 450%;
+}
+h1 {
+	color: white;
+	font-size:60px;
+	font-family:Impact;
+}
+div{
+	font-family:Century Gothic;
+	color: black;
+	font-size:20px;
+	
+}
+
+</style>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script type="text/javascript" src="./processing.min.js"> </script>
+<title>Barbarian Blob Game</title>
+
+
+<style>
+body{
+ background-image:url("http://pic.1fotonin.com/data/wallpapers/230/WDF_2666855.jpg");
+}
+h1 {
+color:blue;
+}
+
+img {
+width:512px;
+height:288px;
+
+}
+a:link, a:visited {
+    background-color: #56FF00;
+    color: green;
+    padding: 14px 25px;
+    text-align: center; 
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:hover, a:active {
+    background-color: red;
+}
+
+</style>
+</head>
+<body>
+<a href = "http://lexingtongwc.github.io/">Click here to go back to the home page</a>
+<center> <h1>Barbarian Blob Game</h1> <center>
+<center> <img src="https://i.ytimg.com/vi/db2GWRHX8to/maxresdefault.jpg"> <center>
+<center> <h5> Barbarian Blob Game created by Nora, Christina, and Rebecca </h5> <center>
+<canvas id="processing-canvas" tabindex="0" style="width='5000px' height='5000px'"></canvas>
+<script type="text/processing" data-processing-target="processing-canvas">
+
+size(400,400);
+
+noStroke();
+var playerSize = 20;
+var playerX = 200;
+var playerY = 200;
+var blobsX = [144,382, 123];
+var blobsY = [26,111,299];
+var i = 0;
+var newBlob = 70;
+stroke(0);
+strokeWeight(1);
+var flash = 1000;
+
+
+draw = function() {
+    
+    background(22, 148, 22);
+    i = 0;
+    noStroke();
+    
+    if(keyPressed && keyCode === UP){
+     playerY = playerY - 3;
+    }
+    if(keyPressed && keyCode === DOWN){
+     playerY = playerY + 3;
+    }
+    if(keyPressed && keyCode === RIGHT){
+     playerX = playerX + 3;
+    }
+    if(keyPressed && keyCode === LEFT){
+     playerX = playerX - 3;
+    }
+    
+    while(i < blobsX.length){
+       if(flash < 500) {
+        fill(33, 143, 23);
+       }
+       else{
+        fill(247, 255, 5);
+       }
+       flash --;   
+       
+       if(flash < 0){
+        flash = 1000; 
+        
+        
+        
+       }
+       
+       //fill(255, 239, 15);
+       ellipse(blobsX[i],blobsY[i],15,15);
+       
+        i++;
+    }
+    
+    if(newBlob === 0){
+        
+        blobsX.push(random(10,390));
+        blobsY.push(random(10,390));
+        newBlob = 70;
+      
+        
+    }
+    else {
+        newBlob --;   
+    }
+    stroke(0);
+    fill(8, 193, 255);
+    ellipse(playerX, playerY, playerSize, playerSize);
+    
+    i = 0;
+    while(i < blobsX.length){
+        if(blobsX[i] > playerX - 0.5 * playerSize && blobsX[i] < playerX + 0.5 * playerSize && blobsY[i] > playerY - 0.5 * playerSize && blobsY[i] < playerY + 0.5 * playerSize ){
+           blobsX.splice(i,1);
+           blobsY.splice(i,1);
+           playerSize = playerSize + 3;
+           
+        }
+        i++;
+    }
+    
+   if(playerX > 400){
+    playerX = 0;   
+   }
+   if(playerX < 0){
+    playerX = 400;   
+   }
+   if(playerY > 400){
+    playerY = 0;   
+   }
+   if(playerY < 0){
+    playerY = 400;   
+   }
+   
+   if(playerSize > 225){
+    playerSize = 20;   
+    background(255, 0, 242);
+   }
+  
+   
+    
+};
+
+
+</script>
+<h6> Website created by Punya Gupta and Gauri </h6>
+
+
+</body>
+</html>
